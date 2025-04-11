@@ -1,1 +1,35 @@
-<app-universite></app-universite>
+<!-- app.component.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">MyApp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/reservations" routerLinkActive="active">Réservations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/bloc" routerLinkActive="active">Blocs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/universite" routerLinkActive="active">Universités</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/foyer" routerLinkActive="active">Foyers</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Route content -->
+  <div class="container mt-4">
+    <router-outlet></router-outlet>
+  </div>
+  

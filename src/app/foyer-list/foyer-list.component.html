@@ -1,75 +1,14 @@
-<!-- Magic Styles -->
-<style>
-  .glass-card {
-    background: rgba(255, 255, 255, 0.75);
-    border-radius: 1rem;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-  }
-
-  .fancy-title {
-    font-family: "Poppins", sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #0d6efd;
-    background: linear-gradient(90deg, #0d6efd, #6610f2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .action-btn {
-    transition: all 0.3s ease-in-out;
-  }
-
-  .action-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.2);
-  }
-
-  /* Dark Theme Styles */
-  .dark-theme {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-
-  .dark-theme .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    color: #e0e0e0;
-  }
-
-  .dark-theme .table {
-    color: #e0e0e0;
-  }
-
-  .dark-theme .btn,
-  .dark-theme .form-control,
-  .dark-theme .input-group-text {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
-    border-color: #333;
-  }
-
-  .dark-theme .form-check-label {
-    color: #e0e0e0;
-  }
-</style>
-
 <!-- Root Wrapper for Theme -->
-<div [ngClass]="{ 'dark-theme': isDarkMode }">
+<div [ngClass]="{ 'bg-dark text-white': isDarkMode }">
   <!-- Modern UI Container -->
   <div class="container py-5">
     <!-- Title + Dark Mode Toggle -->
     <div class="text-center mb-3">
-      <h1 class="fancy-title">🏠 Gestion des Foyers</h1>
+      <h1 class="display-4 fw-bold text-primary mb-3">
+        <span class="d-inline-block gradient-text">🏠 Gestion des Foyers</span>
+      </h1>
 
-      <div
-        class="form-check form-switch d-flex justify-content-center align-items-center mt-3"
-      >
+      <div class="form-check form-switch d-flex justify-content-center align-items-center mt-3">
         <input
           class="form-check-input"
           type="checkbox"
@@ -84,11 +23,9 @@
     </div>
 
     <!-- Header Actions -->
-    <div
-      class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3"
-    >
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
       <!-- Search Bar -->
-      <div class="input-group w-50 shadow-sm rounded">
+      <div class="input-group" style="width: 50%; min-width: 300px;">
         <span class="input-group-text bg-white border-end-0">🔍</span>
         <input
           type="text"
@@ -101,15 +38,15 @@
 
       <!-- Add Button -->
       <button
-        class="btn btn-gradient-primary action-btn px-4"
+        class="btn btn-primary px-4 d-flex align-items-center"
         (click)="showAddFoyerForm = !showAddFoyerForm"
       >
-        ➕ Nouveau Foyer
+        <span class="me-2">➕</span> Nouveau Foyer
       </button>
     </div>
 
     <!-- Add Foyer Form -->
-    <div *ngIf="showAddFoyerForm" class="glass-card p-4 mb-5">
+    <div *ngIf="showAddFoyerForm" class="bg-white bg-opacity-75 rounded-3 p-4 mb-5 shadow">
       <h4 class="text-center text-success mb-4">🏗️ Ajouter un Foyer</h4>
       <form (ngSubmit)="addFoyer()">
         <div class="row g-3">
@@ -135,27 +72,24 @@
           </div>
         </div>
         <div class="text-end mt-4">
-          <button class="btn btn-success me-2 action-btn">
-            💾 Enregistrer
+          <button class="btn btn-success me-2 d-flex align-items-center">
+            <span class="me-2">💾</span> Enregistrer
           </button>
           <button
             type="button"
-            class="btn btn-outline-secondary action-btn"
+            class="btn btn-outline-secondary d-flex align-items-center"
             (click)="cancelAdd()"
           >
-            ❌ Annuler
+            <span class="me-2">❌</span> Annuler
           </button>
         </div>
       </form>
     </div>
 
     <!-- Foyer Table -->
-    <div class="glass-card overflow-hidden">
+    <div class="bg-white bg-opacity-75 rounded-3 overflow-hidden shadow">
       <table class="table align-middle mb-0">
-        <thead
-          class="text-white"
-          style="background: linear-gradient(90deg, #0d6efd, #6610f2)"
-        >
+        <thead class="text-white bg-primary">
           <tr>
             <th>#</th>
             <th>Nom</th>
@@ -165,21 +99,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let foyer of filteredFoyers; let i = index"
-            [ngStyle]="{ backgroundColor: i % 2 === 0 ? '#f8f9fa' : '#ffffff' }"
-          >
+          <tr *ngFor="let foyer of filteredFoyers; let i = index" [ngClass]="{'bg-light': i % 2 === 0}">
             <td class="fw-bold">{{ i + 1 }}</td>
             <td>{{ foyer.nomFoyer }}</td>
             <td>{{ foyer.capaciteFoyer }}</td>
             <td>
               <span
                 class="badge px-3 py-2"
-                [ngClass]="
-                  foyer.capaciteFoyer > 100
-                    ? 'bg-success'
-                    : 'bg-warning text-dark'
-                "
+                [ngClass]="foyer.capaciteFoyer > 100 ? 'bg-success' : 'bg-warning text-dark'"
               >
                 {{
                   foyer.capaciteFoyer > 100
@@ -190,16 +117,16 @@
             </td>
             <td class="text-center">
               <button
-                class="btn btn-outline-primary btn-sm me-2 action-btn"
+                class="btn btn-outline-primary btn-sm me-2 d-flex align-items-center"
                 (click)="editFoyer(foyer)"
               >
-                ✏️ Modifier
+                <span class="me-1">✏️</span> Modifier
               </button>
               <button
-                class="btn btn-outline-danger btn-sm action-btn"
+                class="btn btn-outline-danger btn-sm d-flex align-items-center"
                 (click)="deleteFoyer(foyer.idFoyer)"
               >
-                🗑️ Supprimer
+                <span class="me-1">🗑️</span> Supprimer
               </button>
             </td>
           </tr>
@@ -208,7 +135,7 @@
     </div>
 
     <!-- Edit Foyer Form -->
-    <div *ngIf="selectedFoyer" class="glass-card p-4 mt-5">
+    <div *ngIf="selectedFoyer" class="bg-white bg-opacity-75 rounded-3 p-4 mt-5 shadow">
       <h4 class="text-primary text-center mb-4">✏️ Modifier le Foyer</h4>
       <form (ngSubmit)="updateFoyer()">
         <div class="row g-3">
@@ -234,15 +161,15 @@
           </div>
         </div>
         <div class="text-end mt-4">
-          <button class="btn btn-success me-2 action-btn">
-            💾 Sauvegarder
+          <button class="btn btn-success me-2 d-flex align-items-center">
+            <span class="me-2">💾</span> Sauvegarder
           </button>
           <button
             type="button"
-            class="btn btn-outline-secondary action-btn"
+            class="btn btn-outline-secondary d-flex align-items-center"
             (click)="cancelEdit()"
           >
-            ❌ Annuler
+            <span class="me-2">❌</span> Annuler
           </button>
         </div>
       </form>

@@ -1,33 +1,116 @@
-<h2>Liste des Universités</h2>
-<input placeholder="Filtrer par adresse" [(ngModel)]="filterAddress" />
-<button (click)="filterUniversites()">Filtrer</button>
-<button (click)="getAllUniversites()">Tout afficher</button>
+<div class="container py-5">
+  <h2 class="mb-4">Liste des Universités</h2>
 
-<ul>
-  <li *ngFor="let u of universites">
-    {{ u.idUniversite }} - {{ u.nomUniversite }} ({{ u.adresse }})
-    <button (click)="deleteUniversite(u.idUniversite)">Supprimer</button>
-    <button (click)="selectedUniversite = u">Modifier</button>
-  </li>
-</ul>
+  <!-- Filters -->
+  <div class="card p-4 mb-4 shadow-sm">
+    <div class="form-row align-items-end">
+      <div class="form-group col-md-6">
+        <label for="filterAddress">Filtrer par adresse</label>
+        <input
+          id="filterAddress"
+          type="text"
+          class="form-control"
+          placeholder="Adresse"
+          [(ngModel)]="filterAddress"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <button class="btn btn-info mr-2" (click)="filterUniversites()">Filtrer</button>
+        <button class="btn btn-secondary" (click)="getAllUniversites()">Tout afficher</button>
+      </div>
+    </div>
+  </div>
 
-<h3>Ajouter une Université</h3>
-<input placeholder="Nom" [(ngModel)]="newUniversite.nomUniversite" />
-<input placeholder="Adresse" [(ngModel)]="newUniversite.adresse" />
-<button (click)="createUniversite()">Ajouter</button>
+  <!-- Université List -->
+  <div class="mb-4">
+    <div *ngFor="let u of universites" class="card mb-3 shadow-sm">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="mb-1">{{ u.nomUniversite }}</h5>
+          <p class="mb-1 text-muted">ID: {{ u.idUniversite }}</p>
+          <p class="mb-0">{{ u.adresse }}</p>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-danger mr-2" (click)="deleteUniversite(u.idUniversite)">
+            <i class="fas fa-trash"></i> Supprimer
+          </button>
+          <button class="btn btn-sm btn-warning" (click)="selectedUniversite = u">
+            <i class="fas fa-edit"></i> Modifier
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h3>Modifier une Université</h3>
-<div *ngIf="selectedUniversite">
-  <input [(ngModel)]="selectedUniversite.nomUniversite" placeholder="Nom" />
-  <input [(ngModel)]="selectedUniversite.adresse" placeholder="Adresse" />
-  <button (click)="updateUniversite()">Mettre à jour</button>
-</div>
+  <!-- Add Université -->
+  <div class="card p-4 mb-4 shadow-sm">
+    <h4>Ajouter une Université</h4>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Nom</label>
+        <input
+          class="form-control"
+          placeholder="Nom"
+          [(ngModel)]="newUniversite.nomUniversite"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label>Adresse</label>
+        <input
+          class="form-control"
+          placeholder="Adresse"
+          [(ngModel)]="newUniversite.adresse"
+        />
+      </div>
+    </div>
+    <button class="btn btn-success" (click)="createUniversite()">Ajouter</button>
+  </div>
 
-<h3>Rechercher une Université par ID</h3>
-<input type="number" [(ngModel)]="searchId" />
-<button (click)="getById()">Rechercher</button>
-<div *ngIf="selectedUniversite">
-  <p>ID: {{ selectedUniversite.idUniversite }}</p>
-  <p>Nom: {{ selectedUniversite.nomUniversite }}</p>
-  <p>Adresse: {{ selectedUniversite.adresse }}</p>
+  <!-- Update Université -->
+  <div class="card p-4 mb-4 shadow-sm" *ngIf="selectedUniversite">
+    <h4>Modifier une Université</h4>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Nom</label>
+        <input
+          class="form-control"
+          [(ngModel)]="selectedUniversite.nomUniversite"
+          placeholder="Nom"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <label>Adresse</label>
+        <input
+          class="form-control"
+          [(ngModel)]="selectedUniversite.adresse"
+          placeholder="Adresse"
+        />
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="updateUniversite()">Mettre à jour</button>
+  </div>
+
+  <!-- Search by ID -->
+  <div class="card p-4 mb-4 shadow-sm">
+    <h4>Rechercher une Université par ID</h4>
+    <div class="form-row align-items-end">
+      <div class="form-group col-md-6">
+        <input
+          type="number"
+          class="form-control"
+          placeholder="ID"
+          [(ngModel)]="searchId"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <button class="btn btn-info" (click)="getById()">Rechercher</button>
+      </div>
+    </div>
+
+    <div *ngIf="selectedUniversite" class="mt-3">
+      <p><strong>ID:</strong> {{ selectedUniversite.idUniversite }}</p>
+      <p><strong>Nom:</strong> {{ selectedUniversite.nomUniversite }}</p>
+      <p><strong>Adresse:</strong> {{ selectedUniversite.adresse }}</p>
+    </div>
+  </div>
 </div>
