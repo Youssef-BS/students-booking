@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <h2>Reservation List</h2>
+    <table class="table table-bordered table-striped mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.idReservation }}</td>
+          <td>{{ reservation.reservationDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ reservation.description }}</td>
+          <td>
+            <span [class.text-success]="reservation.status">✔</span>
+            <span [class.text-danger]="!reservation.status">✘</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
