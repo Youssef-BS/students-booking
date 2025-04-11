@@ -3,12 +3,14 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { BlocComponent } from './bloc/bloc.component';
 import { BlocUpdateComponent } from './bloc-update/bloc-update.component';
 import { UniversiteComponent } from './universite/universite.component';
+import { FoyerListComponent } from './foyer-list/foyer-list.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'reservations', pathMatch: 'full' },
   { path: 'reservations', component: ReservationComponent },
   { path: 'bloc', component: BlocComponent },
   { path: 'update-bloc/:id', component: BlocUpdateComponent },
-  { path: 'universite', component: UniversiteComponent },     // route pour ton composant
+  { path: 'universite', component: UniversiteComponent },
+  { path: 'foyer', component: FoyerListComponent },     
 
 ];
