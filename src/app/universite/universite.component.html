@@ -1,0 +1,33 @@
+<h2>Liste des Universités</h2>
+<input placeholder="Filtrer par adresse" [(ngModel)]="filterAddress" />
+<button (click)="filterUniversites()">Filtrer</button>
+<button (click)="getAllUniversites()">Tout afficher</button>
+
+<ul>
+  <li *ngFor="let u of universites">
+    {{ u.idUniversite }} - {{ u.nomUniversite }} ({{ u.adresse }})
+    <button (click)="deleteUniversite(u.idUniversite)">Supprimer</button>
+    <button (click)="selectedUniversite = u">Modifier</button>
+  </li>
+</ul>
+
+<h3>Ajouter une Université</h3>
+<input placeholder="Nom" [(ngModel)]="newUniversite.nomUniversite" />
+<input placeholder="Adresse" [(ngModel)]="newUniversite.adresse" />
+<button (click)="createUniversite()">Ajouter</button>
+
+<h3>Modifier une Université</h3>
+<div *ngIf="selectedUniversite">
+  <input [(ngModel)]="selectedUniversite.nomUniversite" placeholder="Nom" />
+  <input [(ngModel)]="selectedUniversite.adresse" placeholder="Adresse" />
+  <button (click)="updateUniversite()">Mettre à jour</button>
+</div>
+
+<h3>Rechercher une Université par ID</h3>
+<input type="number" [(ngModel)]="searchId" />
+<button (click)="getById()">Rechercher</button>
+<div *ngIf="selectedUniversite">
+  <p>ID: {{ selectedUniversite.idUniversite }}</p>
+  <p>Nom: {{ selectedUniversite.nomUniversite }}</p>
+  <p>Adresse: {{ selectedUniversite.adresse }}</p>
+</div>
