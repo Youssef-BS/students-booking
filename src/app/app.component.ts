@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf , CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, CommonModule],
   template: `
     <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -68,6 +68,94 @@ import { CommonModule } from '@angular/common';
             margin-right: 0.5rem;
         }
         
+        .dropdown-item i {
+            margin-right: 0.4rem;
+        }
+        
+        .dropdown-item.active, .dropdown-item:active {
+            background-color: #0d6efd;
+            color: white;
+        }
+        
+        .chambre-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translate(50%, -30%);
+            font-size: 0.6rem;
+        }
+        
+        /* Custom dropdown menu */
+        .custom-dropdown {
+            position: relative;
+        }
+        
+        .custom-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            min-width: 10rem;
+            padding: 0.5rem 0;
+            margin: 0.125rem 0 0;
+            background-color: #343a40;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.25rem;
+        }
+        
+        .custom-dropdown-menu.show {
+            display: block;
+        }
+        
+        .custom-dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: white;
+            text-align: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+        
+        .custom-dropdown-item:hover, .custom-dropdown-item:focus {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .custom-dropdown-item.active {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .chambres-menu .custom-dropdown-item i {
+            margin-right: 0.5rem;
+        }
+        
+        .chambre-parent {
+            color: #ffc107 !important;
+            font-weight: bold;
+        }
+        
+        .chambre-disponible {
+            color: #28a745 !important;
+        }
+        
+        .chambre-map {
+            color: #17a2b8 !important;
+        }
+        
+        /* For desktop - hover support */
+        @media (min-width: 992px) {
+            .custom-dropdown:hover .custom-dropdown-menu {
+                display: block;
+            }
+        }
+        
         @media (max-width: 991.98px) {
             .navbar-collapse {
                 padding: 1rem 0;
@@ -75,6 +163,29 @@ import { CommonModule } from '@angular/common';
             .nav-link {
                 margin: 0.25rem 0;
                 padding: 0.75rem 1rem;
+            }
+            .custom-dropdown-menu {
+                position: static;
+                float: none;
+                width: auto;
+                margin-top: 0;
+                background-color: transparent;
+                border: 0;
+                box-shadow: none;
+                padding-left: 1.5rem;
+            }
+            .custom-dropdown-item {
+                padding: 0.5rem 1rem;
+            }
+            .custom-dropdown .nav-link::after {
+                display: inline-block;
+                margin-left: 0.5em;
+                vertical-align: 0.2em;
+                content: "";
+                border-top: 0.3em solid;
+                border-right: 0.3em solid transparent;
+                border-bottom: 0;
+                border-left: 0.3em solid transparent;
             }
         }
     </style>
@@ -96,6 +207,30 @@ import { CommonModule } from '@angular/common';
                         <i class="bi bi-house-door"></i> Accueil
                     </a>
                 </li>
+                
+                <!-- Chambres dropdown menu -->
+                <li class="nav-item custom-dropdown">
+                    <a class="nav-link position-relative chambre-parent" (click)="toggleChambreMenu($event)">
+                        <i class="bi bi-house-door-fill"></i> Chambres
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger chambre-badge">
+                          New
+                        </span>
+                    </a>
+                    
+                    <!-- Chambres dropdown menu -->
+                    <div class="custom-dropdown-menu" [ngClass]="{'show': isChambreMenuOpen}">
+                        <a class="custom-dropdown-item" routerLink="/chambre" routerLinkActive="active">
+                            <i class="bi bi-list-check"></i> Liste des Chambres
+                        </a>
+                        <a class="custom-dropdown-item chambre-disponible" routerLink="/chambres-disponibles" routerLinkActive="active">
+                            <i class="bi bi-check-circle"></i> Chambres Disponibles
+                        </a>
+                        <a class="custom-dropdown-item chambre-map" routerLink="/chambre-map" routerLinkActive="active">
+                            <i class="bi bi-geo-alt"></i> Carte des Chambres
+                        </a>
+                    </div>
+                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/reservations" routerLinkActive="active">
                         <i class="bi bi-calendar-check"></i> Réservations
@@ -163,6 +298,9 @@ import { CommonModule } from '@angular/common';
         <p class="mb-0">&copy; 2025 CampusManager. Tous droits réservés.</p>
       </div>
     </footer>
+
+    <!-- Bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   `,
   styles: [`
     :host {
@@ -172,4 +310,36 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  // State for the Chambres dropdown menu
+  isChambreMenuOpen = false;
+  
+  // Toggle the Chambres dropdown menu
+  toggleChambreMenu(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isChambreMenuOpen = !this.isChambreMenuOpen;
+  }
+  
+  // Close dropdown when clicking outside
+  @HostListener('document:click', ['$event'])
+  closeDropdowns(event: Event): void {
+    // Check if the click is outside the dropdown area
+    const target = event.target as HTMLElement;
+    if (!target.closest('.custom-dropdown')) {
+      this.isChambreMenuOpen = false;
+    }
+  }
+  
+  ngOnInit() {
+    // Initialize Bootstrap components if needed
+    setTimeout(() => {
+      const bootstrap = (window as any).bootstrap;
+      if (bootstrap && bootstrap.Dropdown) {
+        document.querySelectorAll('.dropdown-toggle').forEach(element => {
+          new bootstrap.Dropdown(element);
+        });
+      }
+    }, 1000);
+  }
+}
