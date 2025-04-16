@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule for ngClass
+import { Router } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule], // Import CommonModule to enable ngClass and other directives
+  imports: [CommonModule, RouterLink, RouterModule], // Import RouterLink and RouterModule
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -25,6 +27,11 @@ export class HomeComponent {
       date: new Date(),
       type: 'Réservation',
       description: 'Une nouvelle réservation a été effectuée.',
+    },
+    {
+      date: new Date(),
+      type: 'Chambre',
+      description: 'Nouvelle chambre disponible.',
     }
   ];
 
@@ -32,5 +39,14 @@ export class HomeComponent {
   totalUniversities = 5;
   totalFoyers = 10;
   totalBlocs = 15;
+  totalChambres = 20;
   totalReservations = 25;
+
+  constructor(private router: Router) {}
+
+  navigateToPage(event: Event, route: string) {
+    event.preventDefault(); // Prevent default link behavior
+    console.log(`Navigating to ${route} page...`);
+    this.router.navigate([`/${route}`]);
+  }
 }
