@@ -1,4 +1,4 @@
-/// <reference types="google.maps" />
+
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChambreService } from '../core/services/chambre.service';

@@ -7,7 +7,7 @@ import { Chambre } from '../models/chambre.model';
   providedIn: 'root'
 })
 export class ChambreService {
-  private apiUrl = 'http://localhost:8097/api/chambre';
+  private apiUrl = 'http://localhost:8093/api/chambre';
 
   constructor(private http: HttpClient) { }
 

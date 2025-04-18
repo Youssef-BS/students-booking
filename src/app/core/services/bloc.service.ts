@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BlocService {
-  private apiUrl = 'http://localhost:8089/microService/bloc'; 
+  private apiUrl = 'http://localhost:8093/microService/bloc'; 
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { Foyer, Foyerr } from '../models/foyer.model';
   providedIn: 'root'
 })
 export class FoyerService {
-  private apiUrl = 'http://localhost:8089/microService/foyer'; 
+  private apiUrl = 'http://localhost:8093/microService/foyer'; 
 
   constructor(private http: HttpClient) {}
 
