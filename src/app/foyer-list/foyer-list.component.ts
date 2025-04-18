@@ -3,11 +3,12 @@ import { FoyerService} from '../core/services/foyer.service';
 import { Foyer ,Foyerr} from '../core/models/foyer.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   standalone: true,
-  imports: [FormsModule,CommonModule,RouterModule],
+  imports: [CommonModule, RouterLink, RouterModule,FormsModule,HttpClientModule],
   selector: 'app-foyer-list',
   templateUrl: './foyer-list.component.html',
 })

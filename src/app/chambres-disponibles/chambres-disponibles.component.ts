@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { ChambreService } from '../core/services/chambre.service';
 import { BlocService } from '../core/services/bloc.service';
 import { Chambre } from '../core/models/chambre.model';
 import { Bloc } from '../core/models/bloc.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-chambres-disponibles',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, RouterLink, RouterModule,FormsModule,HttpClientModule],
   templateUrl: './chambres-disponibles.component.html',
   styleUrl: './chambres-disponibles.component.css'
 })

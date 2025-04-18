@@ -4,10 +4,11 @@ import { Universite } from '../core/models/universite.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // ← À ajouter
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-universite',
   standalone: true, // ← important
-  imports: [CommonModule, FormsModule, HttpClientModule], // ← ajouter FormsModule ici
+  imports: [CommonModule, FormsModule, HttpClientModule,RouterModule], // ← ajouter FormsModule ici
   templateUrl: './universite.component.html',
   styleUrls: ['./universite.component.css']
 })

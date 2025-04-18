@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { BlocService } from '../core/services/bloc.service';
 import { CommonModule } from '@angular/common';
 import { Bloc } from '../core/models/bloc.model';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [CommonModule, RouterLink, RouterModule,FormsModule,HttpClientModule],
   selector: 'app-bloc-update',
   templateUrl: './bloc-update.component.html',
   styleUrls: ['./bloc-update.component.css']

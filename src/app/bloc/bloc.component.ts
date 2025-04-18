@@ -5,11 +5,12 @@ import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { BlocService } from '../core/services/bloc.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { Bloc } from '../core/models/bloc.model';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   standalone: true,
-  imports: [FormsModule,CommonModule,RouterModule],
+  imports: [CommonModule, RouterLink, RouterModule,FormsModule,HttpClientModule],
   selector: 'app-bloc',
   templateUrl: './bloc.component.html',
   styleUrls: ['./bloc.component.css']

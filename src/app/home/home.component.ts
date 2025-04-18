@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Import CommonModule for ngClass
 import { Router } from '@angular/router';
 import { RouterLink, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterModule], // Import RouterLink and RouterModule
+
+  imports: [CommonModule, RouterLink, RouterModule,FormsModule,HttpClientModule], // Import RouterLink and RouterModule
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

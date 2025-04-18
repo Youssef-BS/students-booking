@@ -9,15 +9,45 @@ import { ChambreComponent } from './chambre/chambre.component';
 import { ChambresDisponiblesComponent } from './chambres-disponibles/chambres-disponibles.component';
 import { ChambreMapsComponent } from './chambre-maps/chambre-maps.component';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
-  { path: 'reservations', component: ReservationComponent },
-  { path: 'bloc', component: BlocComponent },
-  { path: 'update-bloc/:id', component: BlocUpdateComponent },
-  { path: 'universite', component: UniversiteComponent },
-  { path: 'foyer', component: FoyerListComponent },
-  { path: 'chambre', component: ChambreComponent },
-  { path: 'chambres-disponibles', component: ChambresDisponiblesComponent },
-  { path: 'chambre-map', component: ChambreMapsComponent },
-];
+
+  export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    {
+      path: 'home',
+      loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
+    },
+    {
+      path: 'reservations',
+      loadComponent: () => import('./reservation/reservation.component').then(m => m.ReservationComponent)
+    },
+    {
+      path: 'bloc',
+      loadComponent: () => import('./bloc/bloc.component').then(m => m.BlocComponent)
+    },
+    {
+      path: 'update-bloc/:id',
+      loadComponent: () => import('./bloc-update/bloc-update.component').then(m => m.BlocUpdateComponent)
+    },
+    {
+      path: 'universite',
+      loadComponent: () => import('./universite/universite.component').then(m => m.UniversiteComponent)
+    },
+    {
+      path: 'foyer',
+      loadComponent: () => import('./foyer-list/foyer-list.component').then(m => m.FoyerListComponent)
+    },
+    {
+      path: 'chambre',
+      loadComponent: () => import('./chambre/chambre.component').then(m => m.ChambreComponent)
+    },
+    {
+      path: 'chambres-disponibles',
+      loadComponent: () => import('./chambres-disponibles/chambres-disponibles.component').then(m => m.ChambresDisponiblesComponent)
+    },
+    {
+      path: 'chambre-map',
+      loadComponent: () => import('./chambre-maps/chambre-maps.component').then(m => m.ChambreMapsComponent)
+    }
+  ];
+  
+
